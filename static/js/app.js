@@ -18,7 +18,7 @@ function buildMetadata(sampleID) {
     // Inside a loop, you will need to use d3 to append new
     // tags for each key-value in the filtered metadata.
     Object.keys(metadatum).forEach(key => {
-      let description = `${key}: ${metadatum[key]}`;
+      let description = `${key.toUpperCase()}: ${metadatum[key]}`;
       console.log(description);
       panel.append("p").text(description);
     });
@@ -41,12 +41,11 @@ function buildCharts(sampleID) {
     let otu_labels = sample.otu_labels;
     let sample_values = sample.sample_values;
 
-    // Build a Bubble Chart
     console.log(`OTU IDs: ${otu_ids}`);
     console.log(`OTU Labels: ${otu_labels}`);
     console.log(`Sample Values: ${sample_values}`);
 
-    // Render the Bubble Chart
+    // Build a Bubble Chart
     let bubbleTrace = {
       x: otu_ids,
       y: sample_values,
@@ -67,7 +66,8 @@ function buildCharts(sampleID) {
       showlegend: false,
       height: 600,
     };
-    
+
+    // Render the Bubble Chart
     Plotly.newPlot('bubble', bubbleData, bubbleLayout);
 
     // For the Bar Chart, map the otu_ids to a list of strings for your yticks
